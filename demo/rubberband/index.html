@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            background: rgba(100, 45, 250, .3);
+        }
+        #controls {
+            margin: 20px 0 20px 20px;
+        }
+
+        #rubberbandDiv {
+            position: absolute;
+            border: 3px solid blue;
+            cursor: crosshair;
+            display: none;
+        }
+        #canvas {
+            margin-left: 20px;
+            margin-right: 0px;
+            margin-bottom: 20px;
+            border: thin solid #aaa;
+            cursor: pointer;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="controls">
+        <input type="button" name="" id="resetButton" value="reset">
+    </div>
+
+    <div id="rubberbandDiv"></div>
+
+    <canvas id="canvas" width="800" height="520"></canvas>
+
+    <script src="example.js"></script>
+</body>
+</html>
