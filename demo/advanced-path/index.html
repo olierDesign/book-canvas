@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            background: #ddd;
+        }
+        #controls {
+            position: absolute;
+            left: 25px;
+            top: 25px;
+        }
+        #canvas {
+            margin: 10px;
+            padding: 10px;
+            background: #fff;
+            border: 1px inset #aaaaaa;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="1200" height="1200">
+        canvas not supported
+    </canvas>
+
+    <div id="controls">
+        边框颜色:
+        <select name="" id="strokeStyleSelect">
+            <option value="red">red</option>
+            <option value="green">green</option>
+            <option value="blue">blue</option>
+            <option value="orange">orange</option>
+            <option value="cornflowerblue">cornflowerblue</option>
+            <option value="goldenrod">goldenrod</option>
+            <option value="navy">navy</option>
+            <option value="purple">purple</option>
+        </select>
+
+        填充颜色:
+        <select name="" id="fillStyleSelect">
+            <option value="red">red</option>
+            <option value="green">green</option>
+            <option value="blue">blue</option>
+            <option value="orange">orange</option>
+            <option value="cornflowerblue">cornflowerblue</option>
+            <option value="goldenrod">goldenrod</option>
+            <option value="navy">navy</option>
+            <option value="purple">purple</option>
+        </select>
+
+        几边形:
+        <select name="" id="sidesSelect">
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+        </select>
+
+        开始角度:
+        <select name="" id="startAngleSelect">
+            <option value="3">0</option>
+            <option value="4">45</option>
+            <option value="5">90</option>
+            <option value="6">135</option>
+            <option value="7">180</option>
+            <option value="8">225</option>
+        </select>
+
+        填充:
+        <input id="fillCheckbox" type="checkbox" checked>
+
+        编辑:
+        <input id="editCheckbox" type="checkbox">
+
+        清除所有:
+        <input id="eraseAllButton" type="button" value="Erase all">
+    </div>
+
+    <script src="example.js"></script>
+</body>
+</html>

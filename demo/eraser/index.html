@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            background: #ddd;
+        }
+        #canvas {
+            background: #fff;
+            border: 1px inset #aaaaaa;
+        }
+    </style>
+</head>
+<body>
+    <div id="controls">
+        边框颜色:
+        <select name="" id="strokeStyleSelect">
+            <option value="red" selected>red</option>
+            <option value="green">green</option>
+            <option value="blue">blue</option>
+            <option value="orange">orange</option>
+            <option value="cornflowerblue">cornflowerblue</option>
+            <option value="goldenrod">goldenrod</option>
+            <option value="navy">navy</option>
+            <option value="purple">purple</option>
+        </select>
+
+        填充颜色:
+        <select name="" id="fillStyleSelect">
+            <option value="red" selected>red</option>
+            <option value="green">green</option>
+            <option value="blue">blue</option>
+            <option value="orange">orange</option>
+            <option value="cornflowerblue">cornflowerblue</option>
+            <option value="goldenrod">goldenrod</option>
+            <option value="navy">navy</option>
+            <option value="purple">purple</option>
+        </select>
+
+        橡皮擦宽度:
+        <select name="" id="eraserWidthSelect">
+            <option value="5" selected>5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+            <option value="25">25</option>
+            <option value="30">30</option>
+            <option value="35">35</option>
+            <option value="40">40</option>
+        </select>
+
+        橡皮擦形状:
+        <select name="" id="eraserShapeSelect">
+            <option value="circle" selected>circle</option>
+            <option value="rectangle">rectangle</option>
+        </select>
+
+        画画:
+        <input id="drawRadio" type="checkbox" checked>
+
+        橡皮擦
+        <input id="eraserRadio" type="checkbox">
+    </div>
+
+    <canvas id="canvas" width="600" height="600">
+        canvas not support
+    </canvas>
+
+    <script src="example.js"></script>
+</body>
+</html>
