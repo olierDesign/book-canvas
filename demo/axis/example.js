@@ -24,7 +24,9 @@ var canvas = document.getElementById('canvas'),
     TICKS_COLOR = 'navy',
 
     AXIS_LINEWIDTH = 1.0,
-    AXIS_COLOR = 'blue';
+    AXIS_COLOR = 'blue',
+    
+    SPACE_BETWEEN_LABELS_AND_AXIS = 20;
 
 function drawGrid(context, color, stepX, stepY) {
     context.strokeStyle = color;
@@ -114,5 +116,34 @@ function drawHorizontalAxisTicks () {
     }
 }
 
+function drawAxisLabels() {
+    context.fillStyle = 'blue';
+    drawHorizontalAxisLabels();
+    drawVerticalAxisLabels();
+}
+
+function drawHorizontalAxisLabels() {
+    context.textAlign = 'center';
+    context.textBaseline = 'top';
+
+    for (var i = 0; i <= NUM_HORIZONTAL_TICKS; i++) {
+        if (i % 5 === 0) {
+            context.fillText(i, AXIS_ORIGIN.x + i * HORIZONTAL_TICK_SPACING, AXIS_ORIGIN.y + SPACE_BETWEEN_LABELS_AND_AXIS);
+        }
+    }
+}
+
+function drawVerticalAxisLabels() {
+    context.textAlign = 'right';
+    context.textBaseline = 'middle';
+
+    for (var i = 0; i <= NUM_VERTICAL_TICKS; i++) {
+        if (i % 5 === 0) {
+            context.fillText(i, AXIS_ORIGIN.x - SPACE_BETWEEN_LABELS_AND_AXIS, AXIS_ORIGIN.y - i * VERTICAL_TICK_SPACING);
+        }
+    }
+}
+
 drawGrid(context, 'lightgray', 10, 10);
 drawAxes();
+drawAxisLabels();
