@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        output {
+            color: blue;
+        }
+        .floatingControls {
+            background: rgba(0, 0, 0, 0.1);
+            border: thin solid skyblue;
+            box-shadow: rgba(100, 140, 230, 0.5) 2px 2px 6px;
+            padding: 15px;
+            font: 12px Arial;
+        }
+        #canvas {
+            background: skyblue;
+            box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+        }
+        #scoreboard {
+            background: rgba(255, 255, 255, 0.5);
+            position: absolute;
+            left: 755px;
+            top: 20px;
+            color: blue;
+            font-size: 18px;
+            padding: 5px;
+        }
+        #controls {
+            position: absolute;
+            left: 285px;
+            top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="800" height="450">
+        canvas not supported
+    </canvas>
+
+    <div id="scoreboard" class="floatingControls">0</div>
+
+    <div id="controls" class="floatingControls">
+        Launch velocity (m/s):
+        <output id="launchVelocityOutput"></output> m/s <br/>
+
+        Launch angle (degrees): 
+        <output id="launchAngleOutput"></output> degrees <br/>
+    </div>
+
+    <script src="requestNextAnimationFrame.js"></script>
+    <script src="sprites.js"></script>
+    <script src="example.js"></script>
+</body>
+</html>
