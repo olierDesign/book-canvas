@@ -1,3 +1,6 @@
+import { func } from "prop-types";
+
+// 光标
 TextCursor = function(width, fillStyle) {
     this.fillStyle = fillStyle || 'rgba(0, 0, 0, 0.5)';
     this.width = width || 2;
@@ -8,7 +11,7 @@ TextCursor = function(width, fillStyle) {
 TextCursor.prototype = {
     getHeight: function(context) {
         var h = context.measureText('W').width;
-        return Math.ceil(h + h / 6);
+        return h + h / 6;
     },
     createPath: function(context) {
         context.beginPath();
@@ -28,6 +31,52 @@ TextCursor.prototype = {
         context.restore();
     },
     erase: function(context, imageDate) {
-        context.putImageData(imageDate, 0, 0, this.left, this.top, this.width, this.getHeight(context))
+        // context.putImageData(imageDate, 0, 0, this.left, this.top, this.width, this.getHeight(context));
+        context.putImageData(imageDate, 0, 0);
     }
 };
+
+// 文本
+TextLine = function(x, y) {
+    this.text = '';
+    this.left = x;
+    this.bottom = y;
+    this.caret = 0;
+}
+
+TextLine.prototype = {
+    insert: function(text) {
+        this.text = this.text.substr(0, this.caret) + text + this.text.substr(this.caret);
+
+        this.caret += text.length();
+    },
+    removeCharacterBeforeCaret: function() {
+        if (this.caret === 0) {
+            return;
+        }
+
+        this.text = this.text.substring(0, this.caret -1) + this.text.substring(this.caret);
+
+        this.caret--;
+    },
+    getWidth: function(context) {
+        return context.measureText(this.text).width;
+    },
+    getHeight: function(context) {
+        var h = context.measureText('W').width;
+        return h + h / 6;
+    },
+    draw: function(context) {
+        context.save();
+        context.textAlign = 'start';
+        context.textBaseline = 'bottom';
+
+        context.strokeText(this.text, this.left, this.top);
+        context.fillText(this.text, this.left, this.bottom);
+
+        context.restore();
+    },
+    erase: function(context, imageDate) {
+        context.putImageData(imageDate, 0, 0);
+    }
+}

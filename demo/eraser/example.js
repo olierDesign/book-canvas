@@ -8,12 +8,13 @@ var canvas = document.getElementById('canvas'),
     eraserWidthSelect = document.getElementById('eraserWidthSelect'),
 
     ERASER_LINE_WIDTH = 1,
-    ERASER_SHADOW_COLOR = 'rgb(0, 0, 0)',
+    ERASER_STROKE_STYLE = 'white',
+    ERASER_FILL_STYLE = 'white',
 
-    ERASER_SHADOW_STYLE = 'blue',
-    ERASER_STROKE_STYLE = 'rgb(0, 0, 255)',
-    ERASER_SHADOW_OFFSET = -5,
-    ERASER_SHADOW_BLUR = 20,
+    // ERASER_SHADOW_COLOR = 'rgb(0, 0, 0)',
+    // ERASER_SHADOW_STYLE = 'blue',
+    // ERASER_SHADOW_OFFSET = -5,
+    // ERASER_SHADOW_BLUR = 20,
 
     GRID_HORIZONTAL_SPACING = 10,
     GRID_VERTICAL_SPACING = 10,
@@ -140,12 +141,13 @@ function setErasePathForEraser() {
 }
 
 function setEraserAttributes() {
-    context.lineWidth = ERASER_LINE_WIDTH;
-    context.shadowColor = ERASER_SHADOW_STYLE;
-    context.shadowOffsetX = ERASER_SHADOW_OFFSET;
-    context.shadowOffsetY = ERASER_SHADOW_OFFSET;
-    context.shadowBlur = ERASER_SHADOW_BLUR;
+    // context.lineWidth = ERASER_LINE_WIDTH;
+    // context.shadowColor = ERASER_SHADOW_STYLE;
+    // context.shadowOffsetX = ERASER_SHADOW_OFFSET;
+    // context.shadowOffsetY = ERASER_SHADOW_OFFSET;
+    // context.shadowBlur = ERASER_SHADOW_BLUR;
     context.strokeStyle = ERASER_STROKE_STYLE;
+    context.fillStyle = ERASER_FILL_STYLE;
 }
 
 function eraseLast() {
@@ -163,7 +165,7 @@ function drawEraser(loc) {
     setEraserAttributes();
     setDrawPathForEraser(loc);
     context.stroke();
-
+    context.fill();
     context.restore();
 }
 
