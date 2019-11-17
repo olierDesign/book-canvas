@@ -1,50 +1,9 @@
-// 秒表
-Stopwatch = function() {}
-
-Stopwatch.prototype = {
-    startTime: 0,
-    running: false,
-    elapsed: undefined,
-
-    // 开始计时
-    start: function () {
-        this.startTime = +new Date();
-        this.running = true;
-        this.elapsedTime = undefined;
-    },
-
-    // 结束计时
-    stop: function () {
-        this.elapsed = (+new Date()) - this.startTime;
-        this.running = false;
-    },
-
-    // 计时时间
-    getElapsedTime: function () {
-        if (this.running) {
-            return (+new Date()) - this.startTime;
-        } else {
-            return this.elapsed;
-        }
-    },
-
-    // 是否处于计时状态
-    isRunning: function () {
-        return this.running;
-    },
-
-    // 计时时间重置为0
-    reset: function() {
-        this.elapsed = 0;
-    }
-}
-
 // 动画计时器
 /* 参数
 // duration(总时长)
 // timeWarp(扭曲函数): 返回一个扭曲后的播放进度百分比
 **/
-AnimationTimer = function (duration, timeWarp) {
+var AnimationTimer = function (duration, timeWarp) {
     if (duration != undefined) {
         this.duration = duration;
     }
@@ -52,6 +11,7 @@ AnimationTimer = function (duration, timeWarp) {
     if (timeWarp !== undefined) {
         this.timeWarp = timeWarp;
     }
+    
     this.stopwatch = new Stopwatch();
 }
 
@@ -73,6 +33,12 @@ AnimationTimer.prototype = {
         if (!this.stopwatch.running) {
             return undefined;
         }
+
+        // 如果动画计时等于0则返回 0, 否则 (this.timeWarp(percentComplete) / percentComplete) 返回 NaN
+        if (elapsedTime === 0) {
+            return 0;
+        }
+
         // 如果动画计时中 && 没有扭曲函数
         if (this.timeWarp == undefined) {
             return elapsedTime;
@@ -82,12 +48,27 @@ AnimationTimer.prototype = {
         return elapsedTime * (this.timeWarp(percentComplete) / percentComplete);
     },
 
+    getRealElapsedTime: function () {
+        var elapsedTime = this.stopwatch.getElapsedTime();
+
+        // 如果动画计时已结束
+        if (!this.stopwatch.running) {
+            return undefined;
+        } else {
+            return elapsedTime;
+        }
+    },
+
     isRunning: function () {
         return this.stopwatch.isRunning();
     },
 
     isOver: function () {
         return this.stopwatch.getElapsedTime() > this.duration;
+    },
+
+    reset: function() {
+        this.stopwatch.reset();
     }
 }
 
