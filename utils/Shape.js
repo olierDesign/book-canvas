@@ -1,3 +1,5 @@
+// 形状
+
 var Shape = function () {
     this.x = undefined;
     this.y = undefined;
@@ -54,7 +56,7 @@ Shape.prototype = {
     stroke: function(context) {
         context.save();
         context.strokeStyle = this.strokeStyle;
-        this.createPath();
+        this.createPath(context);
         context.stroke();
         context.restore();
     },

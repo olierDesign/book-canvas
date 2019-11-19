@@ -1,3 +1,4 @@
+// 动画精灵
 var Sprite = function(name, painter, behaviors) {
     if (name !== undefined) {
         this.name = name;
