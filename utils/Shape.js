@@ -85,6 +85,17 @@ var Polygon  = function () {
 
 Polygon.prototype = new Shape();
 
+Polygon.prototype.collidesWidth = function (shape) {
+    var axes = shape.getAxes();
+
+    if (axes === undefined) {
+        return polygonCollidesWidthCircle(this, shape);
+    } else {
+        axes.concat(this.getAxes());
+        return !this.separationOnAxes(axes, shape);
+    }
+};
+
 Polygon.prototype.getAxes = function () {
     var v1 = new Vector(),
         v2 = new Vector(),
@@ -191,13 +202,13 @@ Circle.prototype.getAxes = function () {
 Circle.prototype.project = function (axis) {
     var scalars = [],
         point = new Point(this.x, this.y),
-        dotProduct = new Vector(point).dotProduct(axis);
+        dotProduct = new Vector(point.x, point.y).dotProduct(axis);
 
     scalars.push(dotProduct);
     scalars.push(dotProduct + this.radius);
     scalars.push(dotProduct - this.radius);
 
-    return new PromiseRejectionEvent(Math.min.apply(Math, scalars), Math.max.apply(Math, scalars));
+    return new Projection(Math.min.apply(Math, scalars), Math.max.apply(Math, scalars));
 };
 
 Circle.prototype.move = function (dx, dy) {
@@ -243,8 +254,8 @@ function polygonCollidesWidthCircle(polygon, circle) {
         axes = polygon.getAxes(),
         closestPoint = getPolygonPointClosestToCircle(polygon, circle);
 
-    v1 = new Vector(new Point(circle.x, circle.y));
-    v2 = new Vector(new Point(closestPoint.x, closestPoint.y));
+    v1 = new Vector(circle.x, circle.y);
+    v2 = new Vector(closestPoint.x, closestPoint.y);
 
     axes.push(v1.subtract(v2).normalize());
 

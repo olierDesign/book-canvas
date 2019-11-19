@@ -12,6 +12,8 @@ var canvas = document.getElementById('canvas'),
         'rgba(100, 140, 230, 0.6)',
         'rgba(255, 255, 255, 0.8)'
     ],
+    circle1 = new Circle(150, 75, 20),
+    circle2 = new Circle(350, 25, 30),
 
     mousedown= {x: 0, y: 0},
     lastdrag= {x: 0, y: 0},
@@ -114,6 +116,9 @@ for (var i = 0; i < polygonPoints.length; i++) {
 
     shapes.push(polygon);
 }
+
+shapes.push(circle1);
+shapes.push(circle2);
 
 context.shadowColor = 'rgba(100, 140, 255, 0.5)';
 context.shadowBlur = 4;
