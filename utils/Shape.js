@@ -261,3 +261,92 @@ function polygonCollidesWidthCircle(polygon, circle) {
 
     return !polygon.separationOnAxes(axes, circle);
 }
+
+
+/*
+ * ImageShape 对象
+ */
+
+var ImageShape = function(imageSource, x, y, w, h) {
+    var self = this;
+
+    this.image = new Image();
+    this.imageLoaded = false;
+    this.points = [new Point(x, y)];
+    this.x = x;
+    this.y = y;
+
+    this.image.src = imageSource;
+
+    this.image.addEventListener('load', function(e) {
+        self.setPolygonPoints();
+        self.imageLoaded = true
+    }, false);
+};
+
+ImageShape.prototype = new Polygon();
+
+ImageShape.prototype.fill = function (context) { };          // 不填充
+
+ImageShape.prototype.setPolygonPoints = function () {
+    this.points.push(new Point(this.x + this.image.width, this.y));
+    this.points.push(new Point(this.x + this.image.width, this.y + this.image.height));
+    this.points.push(new Point(this.x , this.y + this.image.height));
+};
+
+ImageShape.prototype.drawImage = function(context) {
+    context.drawImage(this.image, this.points[0].x, this.points[0].y);
+};
+
+ImageShape.prototype.stroke = function(context) {
+    var self = this;
+
+    if (this.imageLoaded) {
+        context.drawImage(this.image, this.points[0].x, this.points[0].y);
+    } else {
+        this.image.addEventListener('load', function(e) {
+            self.drawImage(context);
+        }, false);
+    }
+};
+
+
+/*
+ * SpriteShape 对象
+ */
+var SpriteShape = function (sprite, x, y) {
+    this.sprite = sprite;
+    this.x = x;
+    this.y = y;
+    sprite.left = x;
+    sprite.top = y;
+    this.setPolygonPoints();
+};
+
+SpriteShape.prototype = new Polygon();
+
+SpriteShape.prototype.move = function (dx, dy) {
+    var point, x;
+
+    for (var i = 0; i < this.points.length; i++) {
+        point = this.points[i];
+        point.x += dx;
+        point.y += dy;
+    }
+
+    this.sprite.left = this.points[0].x;
+    this.sprite.top = this.points[0].y;
+};
+
+SpriteShape.prototype.fill = function (context) {};
+
+SpriteShape.prototype.setPolygonPoints = function () {
+    this.points.push(new Point(this.x, this.y));
+    this.points.push(new Point(this.x + this.sprite.width, this.y));
+    this.points.push(new Point(this.x + this.sprite.width, this.y + this.sprite.height));
+    this.points.push(new Point(this.x, this.y + this.sprite.height));
+};
+
+SpriteShape.prototype.stroke = function (context) {
+    this.sprite.paint(context);
+};

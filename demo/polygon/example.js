@@ -1,6 +1,9 @@
 var canvas = document.getElementById('canvas'),
     context = canvas.getContext('2d'),
     shapes = [],
+
+    ballSprite = new Sprite('ball', new ImagePainter('tennis-ball.png'))
+
     polygonPoints = [
         [new Point(250, 150), new Point(250, 250), new Point(350, 250)],
         [new Point(100, 100), new Point(100, 150), new Point(150, 150), new Point(150, 100)],
@@ -119,6 +122,9 @@ for (var i = 0; i < polygonPoints.length; i++) {
 
 shapes.push(circle1);
 shapes.push(circle2);
+
+shapes.push(new ImageShape('golfball.png', 50, 50));
+shapes.push(new SpriteShape(ballSprite, 100, 100));
 
 context.shadowColor = 'rgba(100, 140, 255, 0.5)';
 context.shadowBlur = 4;
